@@ -1,0 +1,90 @@
+/* CSS! */
+
+.container {
+	padding: 1em 0 0;
+	text-align: center;
+}
+
+.disclaimer {
+	font-style: italic;
+	margin: 0 0 0.5em;
+}
+
+.logo {
+	max-height: 20em;
+}
+
+h1, h2, .btn-primary {	
+	line-height: 1;
+	text-transform: uppercase;
+	
+	font-weight: normal;
+	font-family: "LeagueGothicRegular", "Impact", "Arial Black", "Sans serif";
+}
+	
+h1, h2 {
+	color: #222;
+}
+
+h1 { font-size: 5em; }
+h2 { font-size: 2em; }
+
+a { color: #CC0000; }
+a:hover { color: #FF0000; }
+
+/* Form */
+
+form {
+	margin: 0;
+}
+
+span.add-on {
+	width: 206px !important;
+}
+
+label input[type='checkbox'] {
+	position: relative;
+	top: -4px;
+}
+
+label {
+	margin: 0;
+}
+
+.control-group:last-of-type {
+	margin: 0 !important;
+}
+
+.btn-primary {
+	margin: 0.4em !important;
+	font-size: 3em;
+}
+
+ul.errors {
+	margin: 0;
+	color: red;
+	list-style: none;
+}
+
+ul.errors li {
+	padding: 0;
+	margin: 0;
+}
+
+/* Controls */
+
+.controls, .messages {
+	position: fixed;
+	padding: 1em;
+}
+.controls {
+	bottom: 0;
+	right: 0;
+}
+.messages {
+	top: 0;
+	right: 0;
+}
+.alert {
+	padding: 8px 14px;
+}

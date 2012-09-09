@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% macro render_errors(object) %}
+	{% if object.errors %}
+		<ul class=errors>
+		{% for error in object.errors %}
+			<li>{{ error }}</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+{% endmacro %}
+
+{% macro render_field(field) %}
+	<div class="control-group">
+		{% if field.widget.input_type == 'checkbox'  %}
+			<label>{{ field(**kwargs)|safe }} {{ field.description|safe }}</label>
+		{% else %}
+			<div class="input-prepend">
+				<span class="add-on">{{ field.label }}</span>
+				{{ field(**kwargs)|safe }}
+			</div>	
+		{% endif %}
+		{{ render_errors(field) }}
+	</div>
+{% endmacro %}
+
+{% block content %}
+	<form class="form-horizontal" method="post" action="">	
+		{{ render_field(form.name) }}
+		{{ render_field(form.email) }}
+		{{ render_field(form.bos) }}
+		{{ render_field(form.paid) }}
+		
+		<input class="btn btn-large btn-primary" type=submit value="Become a member!">
+		
+		<p class="disclaimer">By signing up you accept that you are responsible for your own safety while taking part in the societies activities.</p>
+		
+		{{ form.csrf_token() }}
+		<!-- {{ render_errors(form) }} -->
+	</form>
+{% endblock %}
+
+{% block controls %}
+	{{ super() }}
+	<a class="btn btn-small" href="">Reset</a>
+{% endblock %}

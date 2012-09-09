@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Signup - Aberystwyth Live Action Gaming Society</title>
+	<meta name="author" content="Sam Clements (sam@borntyping.co.uk)">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="/static/favicon.ico" />
+	<link rel="stylesheet" href="/static/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/league-gothic.css">
+	<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="controls">
+	{% block controls %}
+		<a class="btn btn-small" href="{{ url_for('list') }}">List members</a>
+	{% endblock %}
+</div>
+<div class="container">
+	<div class="row">
+		{% block header %}
+			<img class="logo" alt="" src="/static/logo.png" />
+			<h1>Aberystwyth Live Action Gaming Society</h1>
+		{% endblock %}
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div class="wrapper">
+				<div class="messages">
+					{% for message in get_flashed_messages() %}
+						<div class="alert alert-danger">{{ message }}</div>
+					{% endfor %}
+				</div>
+				<div class="content">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

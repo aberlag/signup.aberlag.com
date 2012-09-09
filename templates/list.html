@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<p>The following members have signed up ({{ count }}):</p>
+
+	<table class="table table-striped table-hover table-condensed">
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>BOS Number</th>
+			<th>Paid</th>
+			<th>Edit</th>
+		</tr>
+	{% for member in members %}
+		<tr class="
+			{% if member.paid and member.bos %}
+			success
+			{% elif member.bos or member.paid %}
+			warning
+			{% else %}
+			error
+			{% endif %}">
+			<td>{{ member.name }}</td>
+			<td><a href="mailto://{{ member.email }}">{{ member.email }}</a></td>
+			<td>{% if member.bos %}{{ member.bos }}{% endif %}</td>
+			<td>{% if member.paid %}Yes{% else %}No{% endif %}</td>
+			<td><a href="{{ url_for('edit', id=member.id) }}">Edit</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+{% endblock %}
+
+{% block controls %}
+	<a class="btn btn-small" href="/">Add new member</a>
+{% endblock %}
