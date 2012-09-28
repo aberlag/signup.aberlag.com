@@ -12,9 +12,9 @@
 </head>
 <body>
 <div class="controls">
-	{% block controls %}
-		<a class="btn btn-small" href="{{ url_for('list') }}">List members</a>
-	{% endblock %}
+	<a class="btn btn-small" href="{{ url_for('list') }}">List members</a>
+	<a class="btn btn-small" href="{{ url_for('emails') }}">List emails</a>
+	{% block controls %}{% endblock %}
 </div>
 <div class="container">
 	<div class="row">
