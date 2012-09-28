@@ -106,6 +106,14 @@ def edit (id):
 		return redirect(url_for("list"))
 	return render_template("signup.html", form=form)
 
+@app.route("/delete/<id>", methods=['GET', 'POST'])
+def delete (id):
+	member = Member.query.filter_by(id=id).first()
+	db.session.delete(member)
+	db.session.commit()
+	flash("Member '%s' has been deleted." % member.name)
+	return redirect(url_for("list"))
+
 if __name__ == "__main__":
 	db.create_all()
 	app.run(debug=True, host='0.0.0.0')

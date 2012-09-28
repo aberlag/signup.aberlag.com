@@ -24,7 +24,8 @@
 			<td><a href="mailto://{{ member.email }}">{{ member.email }}</a></td>
 			<td>{% if member.bos %}{{ member.bos }}{% endif %}</td>
 			<td>{% if member.paid %}Yes{% else %}No{% endif %}</td>
-			<td><a href="{{ url_for('edit', id=member.id) }}">Edit</a></td>
+			<td><a class="edit" href="{{ url_for('edit', id=member.id) }}">Edit</a></td>
+			<td><a class="delete" href="{{ url_for('delete', id=member.id) }}">Delete</a></td>
 		</tr>
 	{% endfor %}
 	</table>
