@@ -77,14 +77,16 @@ def signup ():
 @app.route("/list")
 def list ():
 	members = Member.query.all()
-	count = len(members)
+	count = {
+		"all": len(members),
+		"bos": len(Member.query.filter(Member.bos != None)),
+		"paid": len(Member.query.filter(Member.paid == True)),
+	}
 	return render_template("list.html", **locals())
 
 @app.route("/emails")
 def emails ():
-	members = Member.query.all()
-	count = len(members)
-	return ", ".join([member.email for member in members])
+	return ", ".join([member.email for member in Member.query.all()])
 
 @app.route("/clean")
 def clean ():
