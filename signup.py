@@ -79,8 +79,8 @@ def list ():
 	members = Member.query.all()
 	count = {
 		"all": len(members),
-		"bos": len(Member.query.filter(Member.bos != None)),
-		"paid": len(Member.query.filter(Member.paid == True)),
+		"bos": Member.query.filter(Member.bos != None).count(),
+		"paid": Member.query.filter(Member.paid == True).count(),
 	}
 	return render_template("list.html", **locals())
 
