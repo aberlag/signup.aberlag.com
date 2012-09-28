@@ -47,11 +47,6 @@ class SignupForm (Form):
 			raise ValidationError("A member with this email already exists")
 		
 	bos = TextField("BOS Number")
-	
-	def validate_bos (form, field):
-		if Member.query.filter(Member.bos == field.data).first():
-			raise ValidationError("A member with this BOS number already exists")
-	
 	paid = BooleanField("Paid", description="The membership fee is &pound;3 - pay now?")
 
 class EditForm (Form):	
