@@ -90,6 +90,8 @@ def clean ():
 		member.name = member.name.title()
 		if member.bos == "":
 			member.bos = None
+		elif member.bos and member.bos[0] == 'c':
+			member.bos = 'C' + member.bos[1:]
 		db.session.add(member)
 	db.session.commit()
 	return "Database cleaned"
