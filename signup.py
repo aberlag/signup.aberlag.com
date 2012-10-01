@@ -81,7 +81,7 @@ def list ():
 
 @app.route("/emails")
 def emails ():
-	return ", ".join([member.email for member in Member.query.all()])
+	return "<br/>\n".join([member.email for member in Member.query.all()])
 
 @app.route("/clean")
 def clean ():
