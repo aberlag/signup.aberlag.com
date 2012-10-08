@@ -55,6 +55,19 @@ class EditForm (Form):
 	bos = TextField("BOS Number")
 	paid = BooleanField("Paid", description="Has the member paid?")
 
+@app.route("/clean")
+def clean ():
+	members = Member.query.all()
+	for member in members:
+		member.name = member.name.title()
+		if member.bos == "":
+			member.bos = None
+		elif member.bos and member.bos[0] == 'c':
+			member.bos = 'C' + member.bos[1:]
+		db.session.add(member)
+	db.session.commit()
+	return "Database manually cleaned"
+
 @app.route("/", methods=['GET', 'POST'])
 def signup ():
 	form = SignupForm(request.form)
@@ -63,6 +76,7 @@ def signup ():
 		db.session.add(member)
 		try:
 			db.session.commit()
+			clean()
 			flash("'%s' has been signed up. Welcome to AberLAG." % member.name)
 			form = SignupForm()
 		except IntegrityError:
@@ -83,19 +97,6 @@ def list ():
 def emails ():
 	return "<br/>\n".join([member.email for member in Member.query.all()])
 
-@app.route("/clean")
-def clean ():
-	members = Member.query.all()
-	for member in members:
-		member.name = member.name.title()
-		if member.bos == "":
-			member.bos = None
-		elif member.bos and member.bos[0] == 'c':
-			member.bos = 'C' + member.bos[1:]
-		db.session.add(member)
-	db.session.commit()
-	return "Database cleaned"
-
 @app.route("/edit/<id>", methods=['GET', 'POST'])
 def edit (id):
 	member = Member.query.filter_by(id=id).first()
@@ -104,6 +105,7 @@ def edit (id):
 		form.populate_obj(member)
 		db.session.add(member)
 		db.session.commit()
+		clean()
 		flash("Member '%s' has been updated." % member.name)
 		return redirect(url_for("list"))
 	return render_template("signup.html", form=form)
