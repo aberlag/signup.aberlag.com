@@ -85,7 +85,7 @@ def signup ():
 
 @app.route("/list")
 def list ():
-	members = Member.query.all()
+	members = Member.query.order_by(Member.email).all()
 	count = {
 		"all": len(members),
 		"bos": Member.query.filter(Member.bos != None).count(),
